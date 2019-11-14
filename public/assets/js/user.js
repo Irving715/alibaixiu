@@ -1,10 +1,11 @@
 $('#userForm').on('submit', function () {
     var formData = $(this).serialize();
+
     $.ajax({
         type: "post",
         url: "/users",
-        data: "formData",
-        success: function (response) {
+        data: formData,
+        success: function () {
             location.reload();
         },
         error: function () {
@@ -13,6 +14,7 @@ $('#userForm').on('submit', function () {
     });
     return false;
 });
+
 $('#modifyBox').on('change', '#avatar', function () {
 
     var formData = new FormData();
@@ -31,4 +33,51 @@ $('#modifyBox').on('change', '#avatar', function () {
             $('#hiddenAvatar').val(response[0].avatar)
         }
     });
+});
+// 想服务器端发送请求
+$.ajax({
+    type: "get",
+    url: "/users",
+    success: function (response) {
+        console.log(response);
+
+        let html = template('userTpl', {
+            data: response
+        });
+
+        $('#userBox').html(html)
+
+    }
+});
+$('#userBox').on('click', '.edit', function () {
+
+    let id = $(this).attr('data-id');
+    $.ajax({
+        type: "get",
+        url: '/users/' + id,
+        success: function (response) {
+            // console.log(response);
+            let html = template('modifyTpl', response);
+            $('#modifyBox').html(html)
+        }
+    });
+});
+$('#modifyBox').on('submit', '#modifyForm', function () {
+    console.log(777);
+
+    var formData = $(this).serialize();
+
+    var id = $(this).attr('data-id');
+
+    $.ajax({
+        type: "put",
+        url: '/users/' + id,
+        data: formData,
+        success: function (response) {
+
+            location.reload();
+
+        }
+    });
+    return false;
 })
