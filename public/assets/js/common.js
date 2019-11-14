@@ -1,5 +1,4 @@
 $('#logout').on('click', function () {
-    alert('被点击了')
     var isConfirm = confirm('您真的要退出吗');
     if (isConfirm) {
         $.ajax({
