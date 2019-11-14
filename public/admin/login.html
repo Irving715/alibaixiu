@@ -30,9 +30,10 @@
   <script src="../assets/vendors/jquery/jquery.min.js"></script>
   <script type="text/javascript">
     $('#loginBtn').on('click', function () {
+      // 获取用户输入的邮箱和密码
       let email = $('#email').val();
       let password = $('#password').val();
-
+      // 用户输入邮箱  密码非空判断
       if (email.trim().length === 0) {
         alert('请输入邮箱');
         return
@@ -49,7 +50,10 @@
           password: password
         },
         success: function (response) {
+          // 登陆成功 跳转到首页
           location.href = 'index.html'
+          // location.assign('index.html')
+          // location.replace 无历史记录
         },
         error: function () {
           alert('用户名或者密码错误')
