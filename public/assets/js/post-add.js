@@ -34,8 +34,7 @@ $('#addForm').on('submit', function () {
         type: "post",
         url: "/posts",
         data: formData,
-        success: function (response) {
-            alert(7)
+        success: function () {
             location.href = '/admin/posts.html'
         }
     });
