@@ -63,7 +63,6 @@ $('#userBox').on('click', '.edit', function () {
     });
 });
 $('#modifyBox').on('submit', '#modifyForm', function () {
-    console.log(777);
 
     var formData = $(this).serialize();
 
@@ -74,10 +73,22 @@ $('#modifyBox').on('submit', '#modifyForm', function () {
         url: '/users/' + id,
         data: formData,
         success: function (response) {
-
             location.reload();
-
         }
     });
     return false;
+});
+// 删除功能
+// 根据id获取元素加#!!!!!!!!!!!   根据class加.!!!!!!!!!!!
+$('#userBox').on('click', '.delete', function () {
+    if (confirm('是否删除')) {
+        let id = $(this).attr('data-id')
+        $.ajax({
+            type: "delete",
+            url: "/users/" + id,
+            success: function (response) {
+                location.reload()
+            }
+        });
+    }
 })
