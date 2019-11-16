@@ -10,4 +10,14 @@ $('#addCategory').on('submit', function () {
         }
     })
     return false;
-})
+});
+$.ajax({
+    type: "get",
+    url: "/categories",
+    success: function (response) {
+        var html = template('categoryListTpl', {
+            data: response
+        });
+        $('#categoryBox').html(html);
+    }
+});
