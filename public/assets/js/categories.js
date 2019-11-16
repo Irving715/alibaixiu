@@ -48,4 +48,16 @@ $('#formBox').on('submit', 'modifyCategory', function () {
         }
     });
     return false;
+});
+$('#categoryBox').on('click', '.delete', function name(params) {
+    if (confirm('是否删除')) {
+        let id = $(this).attr('data-id');
+        $.ajax({
+            type: "delete",
+            url: "/categories/" + id,
+            success: function () {
+                location.reload()
+            }
+        });
+    }
 })
