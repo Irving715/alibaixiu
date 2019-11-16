@@ -122,4 +122,25 @@ $('#userBox').on('change', '#userStatus', function () {
         deleteMany.hide()
 
     }
+});
+// 批量删除功能
+deleteMany.on('click', function () {
+    let ids = [];
+    // 获取选中用户
+    let checkedUser = $('#userBox').find('input').filter(':checked');
+    // 循环复选框  
+    checkedUser.each(function (index, element) {
+        ids.push($(element).attr('data-id'));
+    });
+
+    if (confirm('确定要批量删除吗')) {
+        $.ajax({
+            type: "delete",
+            url: "/users/" + ids.join('-'),
+
+            success: function () {
+                location.reload();
+            }
+        });
+    }
 })
