@@ -91,4 +91,35 @@ $('#userBox').on('click', '.delete', function () {
             }
         });
     }
+});
+// 全选删除
+let selectAll = $('#selectAll');
+
+let deleteMany = $('#deleteMany');
+
+selectAll.on('change', function () {
+    var status = $(this).prop('checked');
+    if (status) {
+        deleteMany.show()
+    } else {
+        deleteMany.hide()
+    }
+    $('#userBox').find('input').prop('checked', status)
+});
+
+$('#userBox').on('change', '#userStatus', function () {
+    let inputs = $('#userBox').find('input');
+
+    if (inputs.length == inputs.filter(':checked').length) {
+        selectAll.prop('checked', true)
+    } else {
+        selectAll.prop('checked', false)
+
+    };
+    if (inputs.filter(':checked').length > 0) {
+        deleteMany.show()
+    } else {
+        deleteMany.hide()
+
+    }
 })
