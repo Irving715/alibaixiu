@@ -59,3 +59,15 @@ $("#filterForm").on("submit", function () {
     });
     return false;
 });
+$('#postsBox').on('click', '.delete', function () {
+    if (confirm('确定删除？')) {
+        let id = $(this).attr('data-id');
+        $.ajax({
+            type: "delete",
+            url: "/posts/" + id,
+            success: function () {
+                location.reload();
+            }
+        });
+    }
+})
