@@ -35,7 +35,21 @@ $.ajax({
     success: function (response) {
         console.log(response);
 
-        let html = template('slidesTpl', response);
+        let html = template('slidesTpl', {
+            data: response
+        });
         $('#slidesBox').html(html)
     }
 });
+$('#slidesBox').on('click', '.delete', function () {
+    let id = $(this).attr('data-id');
+    if (confirm('是否删除')) {
+        $.ajax({
+            type: "delete",
+            url: "/slides/" + id,
+            success: function () {
+                location.reload()
+            }
+        });
+    }
+})
