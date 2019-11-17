@@ -10,12 +10,7 @@ $.ajax({
     }
 });
 
-// 处理时间格式
-function formateDate(date) {
-    // 将日期时间字符串转换成日期对象
-    date = new Date(date);
-    return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
-}
+
 
 function changePage(page) {
     $.ajax({
@@ -28,6 +23,7 @@ function changePage(page) {
             let html = template("postsTpl", response);
             $("#postsBox").html(html);
             let page = template("pageTpl", response);
+            $('#page').html(page);
         }
     });
 }
