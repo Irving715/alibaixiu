@@ -26,7 +26,6 @@ $('#feature').on('change', function () {
         success: function (response) {
             console.log(response);
             $('#thumbnail').val(response[0].cover);
-
         }
     });
 });
