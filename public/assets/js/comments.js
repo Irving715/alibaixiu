@@ -10,12 +10,7 @@ $.ajax({
 
     }
 });
-// 处理时间格式
-function formateDate(date) {
-    // 将日期时间字符串转换成日期对象
-    date = new Date(date);
-    return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
-};
+
 
 function changePage(page) {
     $.ajax({
@@ -33,4 +28,32 @@ function changePage(page) {
 
         }
     });
-}
+};
+$('#commentsBox').on('click', '.status', function () {
+    var status = $(this).attr('data-status');
+    var id = $(this).attr('data-id');
+    $.ajax({
+        type: "put",
+        url: "/comments/" + id,
+        data: {
+
+            state: status == 0 ? 1 : 0
+        },
+        success: function () {
+            location.reload();
+        }
+    });
+    return
+});
+$('#commentsBox').on('click', '.delete', function () {
+    if (confirm('是否删除')) {
+        let id = $(this).attr('data-id');
+        $.ajax({
+            type: "delete",
+            url: "/comments/" + id,
+            success: function (response) {
+                location.reload()
+            }
+        });
+    }
+})
