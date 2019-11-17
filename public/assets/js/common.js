@@ -21,11 +21,11 @@ function formateDate(date) {
     date = new Date(date);
     return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
 };
-// $.ajax({
-//     type: "get",
-//     url: "/users/" + uesrId,
-//     success: function (response) {
-//         $('.avatar').attr('src', response.avatar);
-//         $('.profile .name').html(response.nickName);
-//     }
-// });
+$.ajax({
+    type: "get",
+    url: '/users/' + userId,
+    success: function (response) {
+        $('.avatar').attr('src', response.avatar);
+        $('.profile .name').html(response.nickName);
+    }
+});
