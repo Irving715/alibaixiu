@@ -10,9 +10,6 @@ $.ajax({
         console.log(response);
         let html = template('postTpl', response);
         $('#article').html(html)
-        console.log(777777777);
-
-
     }
 });
 $('#article').on('click', '#like', function () {
@@ -20,8 +17,6 @@ $('#article').on('click', '#like', function () {
         type: "post",
         url: "/posts/fabulous/" + postId,
         success: function () {
-            console.log(777777777777);
-
             alert('点赞成功')
         }
     });

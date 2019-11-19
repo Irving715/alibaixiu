@@ -12,7 +12,7 @@
 <body>
   <div class="wrapper">
     <div class="topnav">
-      <ul id="topnavBox">
+      <ul id="topNavBox">
 
       </ul>
     </div>
@@ -75,31 +75,9 @@
     </div>
   </div>
   <script src="assets/vendors/jquery/jquery.js"></script>
+  <script src="assets/vendors/nprogress/nprogress.js"></script>
   <script src="assets/vendors/swipe/swipe.js"></script>
   <script src="assets/vendors/art-template/template-web.js"></script>
-  <script src="assets/vendors/nprogress/nprogress.js"></script>
-  <script>
-    //
-    var swiper = Swipe(document.querySelector('.swipe'), {
-      auto: 3000,
-      transitionEnd: function (index) {
-        // index++;
-
-        $('.cursor span').eq(index).addClass('active').siblings('.active').removeClass('active');
-      }
-    });
-
-    // 上/下一张
-    $('.swipe .arrow').on('click', function () {
-      var _this = $(this);
-
-      if (_this.is('.prev')) {
-        swiper.prev();
-      } else if (_this.is('.next')) {
-        swiper.next();
-      }
-    })
-  </script>
   <script type="text/html" id="slidesTpl">
     {{each data}}
     <li>
@@ -108,7 +86,6 @@
         <span>{{$value.title}}</span>
       </a>
     </li>
-
     {{/each}}
   </script>
   <script type="text/html" id="lastedTpl">

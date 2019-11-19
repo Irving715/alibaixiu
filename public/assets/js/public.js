@@ -43,8 +43,6 @@ $.ajax({
   type: "get",
   url: "/comments/lasted",
   success: function (response) {
-    console.log(response);
-
     let commentTpl = `
         {{each data}}
         <li>
@@ -76,7 +74,7 @@ $.ajax({
         {{each data}}
         <li>
             <a href="list.html?categoryId={{$value._id}}">
-                 <i class="fa fa-glass"></i>{{$value.title}}
+                 <i class="fa {{$value.className}}"></i>{{$value.title}}
             </a>
         </li>
         {{/each}}
@@ -86,12 +84,12 @@ $.ajax({
       data: response
     });
     $('#navBox').html(html)
-    $('#topnavBox').html(html)
+    $('#topNavBox').html(html)
 
   }
 });
 $('.search form').on('submit', function () {
-  let keys = $(this).find('.keys');
+  let keys = $(this).find('.keys').val();
 
   location.href = '/search.html?key=' + keys;
 

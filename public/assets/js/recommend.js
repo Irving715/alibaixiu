@@ -1,4 +1,3 @@
-let key = getUrlParams('key')
 $.ajax({
   type: "get",
   url: "/posts/recommend",
