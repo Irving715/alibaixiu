@@ -1,13 +1,25 @@
 function formateDate(date) {
-    // 将日期时间字符串转换成日期对象
-    date = new Date(date);
-    return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
+  // 将日期时间字符串转换成日期对象
+  date = new Date(date);
+  return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate()
 };
+
+function getUrlParams(name) {
+  var paramsAry = location.search.substr(1).split('&');
+  // 循环数据
+  for (var i = 0; i < paramsAry.length; i++) {
+    var tmp = paramsAry[i].split('=');
+    if (tmp[0] == name) {
+      return tmp[1];
+    }
+  }
+  return -1;
+}
 $.ajax({
-    type: "get",
-    url: "/posts/random",
-    success: function (response) {
-        let randomTpl = `
+  type: "get",
+  url: "/posts/random",
+  success: function (response) {
+    let randomTpl = `
         {{each data}}
         <li>
         <a href="detail.html?id={{$value._id}}">
@@ -20,20 +32,20 @@ $.ajax({
       </li>
       {{/each}}
         `;
-        let html = template.render(randomTpl, {
-            data: response
-        })
-        $('#randomBox').html(html)
+    let html = template.render(randomTpl, {
+      data: response
+    })
+    $('#randomBox').html(html)
 
-    }
+  }
 });
 $.ajax({
-    type: "get",
-    url: "/comments/lasted",
-    success: function (response) {
-        console.log(response);
+  type: "get",
+  url: "/comments/lasted",
+  success: function (response) {
+    console.log(response);
 
-        let commentTpl = `
+    let commentTpl = `
         {{each data}}
         <li>
         <a href="javascript:;">
@@ -50,17 +62,17 @@ $.ajax({
       </li>
       {{/each}}
         `
-        let html = template.render(commentTpl, {
-            data: response
-        })
-        $('#commentBox').html(html)
-    }
+    let html = template.render(commentTpl, {
+      data: response
+    })
+    $('#commentBox').html(html)
+  }
 });
 $.ajax({
-    type: "get",
-    url: "/categories",
-    success: function (response) {
-        let navTpl = `
+  type: "get",
+  url: "/categories",
+  success: function (response) {
+    let navTpl = `
         {{each data}}
         <li>
             <a href="list.html?categoryId={{$value._id}}">
@@ -70,11 +82,18 @@ $.ajax({
         {{/each}}
         
         `;
-        let html = template.render(navTpl, {
-            data: response
-        });
-        $('#navBox').html(html)
-        $('#topnavBox').html(html)
+    let html = template.render(navTpl, {
+      data: response
+    });
+    $('#navBox').html(html)
+    $('#topnavBox').html(html)
 
-    }
+  }
 });
+$('.search form').on('submit', function () {
+  let keys = $(this).find('.keys');
+
+  location.href = '/search.html?key=' + keys;
+
+  return false
+})

@@ -1,9 +1,8 @@
+let key = getUrlParams('key')
 $.ajax({
   type: "get",
   url: "/posts/recommend",
   success: function (response) {
-    console.log(response);
-
     let recommendTpl = `
         {{each data}}
         <li>
